@@ -1,0 +1,81 @@
+<html>
+
+<head>
+
+    <!-- Load ioBroker scripts and styles-->
+    <link rel="stylesheet" type="text/css" href="../../css/adapter.css"/>
+    <link rel="stylesheet" type="text/css" href="../../lib/css/materialize.css">
+
+    <script type="text/javascript" src="../../lib/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../../socket.io/socket.io.js"></script>
+
+    <script type="text/javascript" src="../../js/translate.js"></script>
+    <script type="text/javascript" src="../../lib/js/materialize.js"></script>
+    <script type="text/javascript" src="../../js/adapter-settings.js"></script>
+
+    <!-- Load our own files -->
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <script type="text/javascript" src="words.js"></script>
+
+    <script type="text/javascript">
+        function load(settings, onChange){
+            if(!settings) return;
+
+            // Fill select list
+
+            $('.value').each(function() {
+                let $key = $(this);
+                let id = $key.attr('id');
+                if($key.attr('type') === 'checkbox'){
+                    $key.prop('checked', settings[id]);
+                }
+                else{
+                    $key.val(settings[id]);
+                }
+            });
+
+            onChange(false);
+
+            // reinitialize all the Materialize labels on the page if you are dynamically adding inputs:
+            if(M) M.updateTextFields();
+        }
+
+        // This will be called by the admin adapter when the user presses the save button
+        function save(callback){
+            // Checkup
+
+            $('.value').each(function(){
+                let $this = $(this);
+                if($this.attr('type') === 'checkbox'){
+                    obj[$this.attr('id')] = $this.prop('checked');
+                }
+                else{
+                    obj[$this.attr('id')] = $this.val();
+                }
+            });
+            callback(obj);
+        }
+    </script>
+
+</head>
+
+<body>
+
+<div class="m adapter-container">
+
+    <div class="row">
+        <div class="col s12 m4 l2">
+            <img src="rtsp.png" class="logo">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s5 input-field">
+            <input type="text" id="rtspStream" class="value" placeholder="rtsp://STREAM.IP/XY"/>
+            <label for="rtspStream" class="translate">Rtsp Stream</label>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

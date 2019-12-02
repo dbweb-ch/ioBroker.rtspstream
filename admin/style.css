@@ -1,0 +1,10 @@
+* {
+    box-sizing: border-box
+}
+.m {
+    /* Don't cut off dropdowns! */
+    overflow: initial;
+}
+.m .input-field>label:read-only {
+    transform: translateY(-14px) scale(.8);
+}

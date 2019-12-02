@@ -1,0 +1,40 @@
+{
+  "name": "iobroker.rtspStream",
+    "version": "0.0.1",
+  "description": "Adapter to get rtsp-Streams",
+  "author": {
+    "name": "Dominic Blattmann",
+    "email": "nick@dbweb.ch"
+  },
+    "homepage": "https://github.com/dbweb-ch/ioBroker.rtspStream",
+  "license": "MIT",
+  "keywords": [
+    "ioBroker",
+    "rtsp",
+    "camera",
+    "Smart Home",
+    "home automation"
+  ],
+  "repository": {
+    "type": "git",
+      "url": "https://github.com/dbweb-ch/ioBroker.rtspStream"
+  },
+  "dependencies": {
+    "@iobroker/adapter-core": "^1.0.3",
+    "node-rtsp-stream": "^0.0.8"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "mocha": "^6.0.2",
+    "chai": "^4.1.2"
+  },
+  "main": "main.js",
+  "scripts": {
+    "test": "node node_modules/mocha/bin/mocha --exit",
+    "lint": "eslint"
+  },
+  "bugs": {
+    "url": "https://github.com/dbweb-ch/iobroker.rtspStream/issues"
+  },
+  "readmeFilename": "README.md"
+}

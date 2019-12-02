@@ -1,0 +1,60 @@
+{
+    "common": {
+        "name": "rtspStream",
+        "version": "0.0.1",
+        "news": {
+            "0.0.1": {
+                "en": "initial Commit",
+                "de": "Erstveröffentlichung"
+            }
+        },
+        "title": "Rtsp Stream",
+        "titleLang": {
+            "en": "Rtsp Stream",
+            "de": "Rtsp Stream"
+        },
+        "desc": {
+            "en": "Stream rtsp",
+            "de": "Adapter für rtsp-Streams"
+        },
+        "authors": [
+            "Dominic Blattmann <nick@dbweb.ch>"
+        ],
+        "keywords": [
+            "ioBroker",
+            "rtsp",
+            "camera",
+            "Smart Home",
+            "home automation"
+        ],
+        "license": "MIT",
+        "platform": "Javascript/Node.js",
+        "main": "main.js",
+        "icon": "rtsp.png",
+        "enabled": true,
+        "extIcon": "https://raw.githubusercontent.com/dbweb-ch/ioBroker.rtspStream/master/admin/rtsp.png",
+        "readme": "https://github.com/dbweb-ch/ioBroker.rtspStream/blob/master/README.md",
+        "loglevel": "info",
+        "messagebox": true,
+        "subscribe": "messagebox",
+        "restartAdapters": [
+            "rtspStream"
+        ],
+        "mode": "daemon",
+        "type": "general",
+        "compact": true,
+        "materialize": true,
+        "materializeTab": false,
+        "supportCustoms": false,
+        "dependencies": [
+            {
+                "js-controller": ">=1.4.2"
+            }
+        ]
+    },
+    "native": {
+        "rtspStream": ""
+    },
+    "objects": [],
+    "instanceObjects": []
+}
