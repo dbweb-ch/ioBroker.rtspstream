@@ -27,10 +27,13 @@
                 let $key = $(this);
                 let id = $key.attr('id');
                 if($key.attr('type') === 'checkbox'){
-                    $key.prop('checked', settings[id]);
+                    $key.prop('checked', settings[id])
+                        .on('change', () => onChange())
                 }
                 else{
-                    $key.val(settings[id]);
+                    $key.val(settings[id])
+                        .on('change', () => onChange())
+                        .on('keyup', () => onChange());
                 }
             });
 
@@ -43,6 +46,7 @@
         // This will be called by the admin adapter when the user presses the save button
         function save(callback){
             // Checkup
+            var obj = {};
 
             $('.value').each(function(){
                 let $this = $(this);
