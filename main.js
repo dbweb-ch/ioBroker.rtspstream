@@ -1,8 +1,8 @@
 'use strict';
 
 const utils = require('@iobroker/adapter-core');
-
-
+const Stream = require('node-rtsp-stream');
+let stream;
 class rtspStream extends utils.Adapter {
 
     /**
@@ -43,7 +43,8 @@ class rtspStream extends utils.Adapter {
             callback();
         }
     }
-        /**
+
+    /**
      * Is called if a subscribed state changes
      * @param {string} id
      * @param {ioBroker.State | null | undefined} state
@@ -53,7 +54,27 @@ class rtspStream extends utils.Adapter {
         if(!state) return;
         Adapter.log.debug("State Change: " + id + " to " + state.val + " ack " + state.ack);
 
-        // TODO State Changed
+        const currentId = id.substring(Adapter.namespace.length + 1);
+        if(state && !state.ack){
+            if(currentId === 'startStream'){
+                if(state.val){
+                    const streamUrl = await Adapter.getStateAsync('rtspUrl');
+                    const port = await Adapter.getStateAsync('port');
+                    stream = new Stream({
+                        name: 'name',
+                        streamUrl: streamUrl,
+                        wsPort: port,
+                        ffmpegOptions: { // options ffmpeg flags
+                            '-stats': '', // an option with no neccessary value uses a blank string
+                            '-r': 30 // options with required values specify the value after the key
+                        }
+                    })
+                }
+                else {
+                    stream.stop();
+                }
+            }
+        }
     }
 
     async onMessage(msg){

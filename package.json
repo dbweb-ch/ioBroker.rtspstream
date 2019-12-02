@@ -1,12 +1,12 @@
 {
   "name": "iobroker.rtspStream",
-    "version": "0.0.1",
+  "version": "0.0.1",
   "description": "Adapter to get rtsp-Streams",
   "author": {
     "name": "Dominic Blattmann",
     "email": "nick@dbweb.ch"
   },
-    "homepage": "https://github.com/dbweb-ch/ioBroker.rtspStream",
+  "homepage": "https://github.com/dbweb-ch/ioBroker.rtspStream",
   "license": "MIT",
   "keywords": [
     "ioBroker",
@@ -17,11 +17,11 @@
   ],
   "repository": {
     "type": "git",
-      "url": "https://github.com/dbweb-ch/ioBroker.rtspStream"
+    "url": "https://github.com/dbweb-ch/ioBroker.rtspStream"
   },
   "dependencies": {
     "@iobroker/adapter-core": "^1.0.3",
-    "node-rtsp-stream": "^0.0.8"
+    "node-rtsp-stream": "github:dbweb-ch/node-rtsp-stream#master"
   },
   "devDependencies": {
     "gulp": "^4.0.0",

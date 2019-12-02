@@ -53,8 +53,22 @@
         ]
     },
     "native": {
-        "rtspStream": ""
+        "rtspUrl": "",
+        "port": ""
     },
     "objects": [],
-    "instanceObjects": []
+    "instanceObjects": [
+        {
+            "_id": "startStream",
+            "type": "state",
+            "common": {
+                "name": "Start the stream",
+                "type": "boolean",
+                "role": "state",
+                "write": true,
+                "def": false
+            },
+            "native": {}
+        }
+    ]
 }
