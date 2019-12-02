@@ -11,7 +11,7 @@ class rtspStream extends utils.Adapter {
     constructor(options){
         super({
             ...options,
-            name: 'tesla-motors',
+            name: 'rtspStream',
         });
         this.on('ready', this.onReady.bind(this));
         this.on('stateChange', this.onStateChange.bind(this));
@@ -23,9 +23,9 @@ class rtspStream extends utils.Adapter {
      * Is called when databases are connected and adapter received configuration.
      */
     async onReady(){ //
-        this.log.debug('Starting Tesla Motors');
+        this.log.debug('Starting rtsp Stream');
         const Adapter = this;
-        await Adapter.setStateAsync('info.connection', false, true);
+        await Adapter.setStateAsync('info.connection', true, true);
 
         this.subscribeStates('*'); // TODO: Subscribe right things...
 
