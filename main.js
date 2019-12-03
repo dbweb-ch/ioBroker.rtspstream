@@ -2,6 +2,7 @@
 
 const utils = require('@iobroker/adapter-core');
 const Stream = require('node-rtsp-stream');
+const commandExists = require('command-exists');
 const http = require('http');
 let stream, VideoPort, server;
 class rtspStream extends utils.Adapter {
@@ -27,6 +28,16 @@ class rtspStream extends utils.Adapter {
         this.log.debug('Starting rtsp Stream');
         const Adapter = this;
         await Adapter.setStateAsync('info.connection', true, true);
+
+        // Check if ffmpeg exists
+        // invoked without a callback, it returns a promise
+        commandExists('ffmpeg').then(function (command) {
+            // proceed
+        }).catch(function () {
+            Adapter.log.error("ffmpeg not installed, please install ffmeg first: apt-get install ffmpeg");
+            Adapter.disable();
+            return;
+        });
 
         this.subscribeStates('*'); // TODO: Subscribe right things...
 

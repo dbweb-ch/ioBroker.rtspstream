@@ -21,7 +21,8 @@
   },
   "dependencies": {
     "@iobroker/adapter-core": "^1.0.3",
-    "node-rtsp-stream": "^0.0.8"
+    "node-rtsp-stream": "^0.0.8",
+    "command-exists": "^1.2.8"
   },
   "devDependencies": {
     "gulp": "^4.0.0",
