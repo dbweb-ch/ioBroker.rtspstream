@@ -60,6 +60,7 @@ class rtspStream extends utils.Adapter {
                 if(state.val){
                     const streamUrl = await Adapter.getStateAsync('rtspUrl');
                     const port = await Adapter.getStateAsync('port');
+                    Adapter.log.debug("Start stream on " + streamUrl + "with port " + port);
                     stream = new Stream({
                         name: 'name',
                         streamUrl: streamUrl,
