@@ -22,7 +22,13 @@
             if(!settings) return;
 
             // Fill select list
-
+            if(settings["port"] == ""){
+                sendTo(null, 'getPort',{}, response => {
+                    settings["port"] = response.port;
+                    $('#port').val(response.port);
+                    onChange();
+                })
+            }
             $('.value').each(function() {
                 let $key = $(this);
                 let id = $key.attr('id');
