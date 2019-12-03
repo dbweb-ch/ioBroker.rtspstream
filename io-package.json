@@ -69,6 +69,18 @@
                 "def": false
             },
             "native": {}
+        },
+        {
+            "_id": "visCode",
+            "type": "state",
+            "common": {
+                "name": "HTML Code to use in Vis",
+                "type": "string",
+                "role": "state",
+                "def": ""
+            },
+            "native": {}
         }
+
     ]
 }
