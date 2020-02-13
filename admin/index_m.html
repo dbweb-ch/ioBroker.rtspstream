@@ -42,13 +42,15 @@
                     rtspUrl: $('#rtspUrl').val(),
                     port: $('#port').val(),
                     resolution: $('#resolution').val(),
-                    tcpPort: $('#tcpPort').val()
+                    tcpPort: $('#tcpPort').val(),
+                    ffmpegOptions: $('#ffmpegOptions').val()
                 }, response => {
                     emitStreams();
                     $('#streamName').val('');
                     $('#rtspUrl').val('');
                     $('#resolution').val('');
                     $('#tcpPort').val('');
+                    $('#ffmpegOptions').val('');
                     sendTo(null, 'getPort',{}, response => {
                         $('#port').val(response.port);
                     })
@@ -84,6 +86,7 @@
             text += '<td>' + obj[prefix + 'port'].val + '</td>';
             text += '<td>' + obj[prefix + 'resolution'].val + '</td>';
             text += '<td>' + obj[prefix + 'tcpPort'].val + '</td>';
+            text += '<td>' + obj[prefix + 'ffmpegOptions'].val + '</td>';
             text += '<td>' + '' +
                 '<a id="delete_'+ name + '" class="delete-stream values-buttons btn-floating btn-small waves-effect waves-light red"><i class="material-icons" title="Delete device from deConz">delete</i></a>';
             text += '</select></td>';
@@ -143,6 +146,10 @@
             <input type="text" id="resolution" class="value" placeholder="1920x1080"/>
             <p><label for="resolution" class="translate">Resolution</label></p>
         </div>
+        <div class="col s5 input-field">
+            <input type="text" id="ffmpegOptions" class="value" placeholder="{'-r':30}"/>
+            <p><label for="ffmpegOptions" class="translate">Additional ffmpeg Options (as JSON)</label></p>
+        </div>
         <div class="col s2 input-field">
             <a class="waves-effect waves-light btn" id="addStream">
                 <span class="translate" data-position="bottom" data-delay="50" data-lang="Add Stream">Add Stream</span>
@@ -157,6 +164,7 @@
                     <th class="translate" data-lang="port">Port</th>
                     <th class="translate" data-lang="resolution">Resolution</th>
                     <th class="translate" data-lang="tcpPort">Tcp Port</th>
+                    <th class="translate" data-lang="ffmpegOptions">ffmpeg Options</th>
                     <th class="translate"></th>
                 </tr>
                 </thead>

@@ -124,8 +124,19 @@ class rtspStream extends utils.Adapter {
                     ffmpegOptions['-vf'] = ' scale=w=' + width + ':h=' + height + ':force_original_aspect_ratio=decrease';
                     Adapter.log.info("Setting stream Resolution to " + width + " x " + height);
                 }
+                let UserFfmpegOptions;
+                let str = await Adapter.getStateAsync(Adapter.namespace + '.' + name + '.ffmpegOptions');
+                try {
+                    UserFfmpegOptions = JSON.parse(str.val);
+                    Adapter.log.error("ffmpeg options ok");
+                }
+                catch(e){
+                    UserFfmpegOptions = {};
+                    Adapter.log.error("ffmpeg options not ok" + str.val);
+                }
+                ffmpegOptions = {...ffmpegOptions, ...UserFfmpegOptions};
                 Adapter.log.info("Start stream on " + rtspUrl.val + "with port " + streams[name].videoPort + JSON.stringify(ffmpegOptions));
-                let stream = new Stream({
+                streams[name]["stream"] = new Stream({
                     name: 'name',
                     streamUrl: rtspUrl.val,
                     wsPort: parseInt(streams[name].videoPort),
@@ -207,6 +218,18 @@ class rtspStream extends utils.Adapter {
                 native: {}
             });
             Adapter.setStateAsync(msg.message.streamName + '.tcpPort', msg.message.tcpPort, true);
+            await this.setObjectNotExistsAsync(msg.message.streamName + '.ffmpegOptions', {
+                type: "state",
+                common: {
+                    name: 'Tcp Port',
+                    desc: 'TCP Port of the Camera',
+                    type: 'text',
+                    role: 'text',
+                    write: false
+                },
+                native: {}
+            });
+            Adapter.setStateAsync(msg.message.streamName + '.ffmpegOptions', msg.message.ffmpegOptions, true);
             await this.setObjectNotExistsAsync(msg.message.streamName + '.startStream', {
                 type: "state",
                 common: {
