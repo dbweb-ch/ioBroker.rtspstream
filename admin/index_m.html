@@ -85,7 +85,7 @@
             text += '<td>' + obj[prefix + 'resolution'].val + '</td>';
             text += '<td>' + obj[prefix + 'tcpPort'].val + '</td>';
             text += '<td>' + '' +
-            '<a id="delete_'+ name + '" class="delete-stream values-buttons btn-floating btn-small waves-effect waves-light red"><i class="material-icons" title="Delete device from deConz">delete</i></a>';
+                '<a id="delete_'+ name + '" class="delete-stream values-buttons btn-floating btn-small waves-effect waves-light red"><i class="material-icons" title="Delete device from deConz">delete</i></a>';
             text += '</select></td>';
             text = '<tr data-id="delete_'+ name + '">' + text + '</tr>';
             $('#streams').append(text);
@@ -132,8 +132,8 @@
             <p><label for="port" class="translate">Access Port</label></p>
         </div>
         <div class="col s6 input-field">
-        <input type="text" id="rtspUrl" class="value" placeholder="rtsp://STREAM.IP/XY"/>
-        <p><label for="rtspUrl" class="translate">Stream Url</label></p>
+            <input type="text" id="rtspUrl" class="value" placeholder="rtsp://STREAM.IP/XY"/>
+            <p><label for="rtspUrl" class="translate">Stream Url</label></p>
         </div>
         <div class="col s4 input-field">
             <input type="text" id="tcpPort" class="value" placeholder="554"/>
