@@ -20,8 +20,7 @@ rtsp://170.93.143.139/rtplive/470011e600ef003a004ee33696235daa
 ```
 Enter a **port** and save configuration.
 
-Currently only 1 Stream is supported. If you want to have multiple streams, install multiple instances.
-In later version multiple streams will be supported...
+Multiple Streams are supported, please use different ports for all streams for both ports!
 
 ## Using the Adapter
 ### Access the stream
@@ -35,17 +34,20 @@ http://192.168.1.100:8084
 The port is the port you have been storing in the configuration of the Adapter.
 You can use this address in a iframe of your VIS-Project.
 ### Stop streaming
-The adapter creates a state "rtspStream.0.startStream". Set it to false will stop streaming and eating your cpu.
+The adapter creates a state "rtspStream.0.[Streamname].startStream". Set it to false will stop streaming and eating your cpu.
 ## Known Problems
 * Currently only http is supported
 * Only works on Linux with ffmpeg installed (maybe will try to include autoinstaller and windows)
-* You can not set any streaming options like size, frame rate etc.
 * I have no clue if this works with other cameras than the highway-camera, please report ;)
 
 ## Contributors
 * dbweb-ch
+* wawyo (Resolution)
 
 ## Changelog
+### 0.0.2
+* (dbweb-ch) Multistreams
+* (wawyo) Set resolution, 3 streams
 ### 0.0.1
 * (dbweb-ch) initial implementation with 1 stream
 

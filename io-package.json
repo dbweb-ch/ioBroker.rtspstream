@@ -1,8 +1,12 @@
 {
     "common": {
         "name": "rtspStream",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "news": {
+            "0.0.2": {
+                "en": "Multiple rtsp-Streams, set video resolution",
+                "de": "Mehrere Streams möglich, Auflösung setzen"
+            },
             "0.0.1": {
                 "en": "initial Commit",
                 "de": "Erstveröffentlichung"
