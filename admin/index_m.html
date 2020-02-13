@@ -21,19 +21,39 @@
         function load(settings, onChange){
             if(!settings) return;
 
-            // Fill select list
 
             $('.value').each(function() {
                 let $key = $(this);
                 let id = $key.attr('id');
                 if($key.attr('type') === 'checkbox'){
-                    $key.prop('checked', settings[id]);
+                    $key.prop('checked', settings[id])
+                        .on('change', () => onChange())
                 }
                 else{
-                    $key.val(settings[id]);
+                    $key.val(settings[id])
+                        .on('change', () => onChange())
+                        .on('keyup', () => onChange());
                 }
             });
-
+            emitStreams();
+            $('#addStream').click(function () {
+                sendTo(null, 'addStream', {
+                    streamName: $('#streamName').val(),
+                    rtspUrl: $('#rtspUrl').val(),
+                    port: $('#port').val(),
+                    resolution: $('#resolution').val(),
+                    tcpPort: $('#tcpPort').val()
+                }, response => {
+                    emitStreams();
+                    $('#streamName').val('');
+                    $('#rtspUrl').val('');
+                    $('#resolution').val('');
+                    $('#tcpPort').val('');
+                    sendTo(null, 'getPort',{}, response => {
+                        $('#port').val(response.port);
+                    })
+                });
+            });
             onChange(false);
 
             // reinitialize all the Materialize labels on the page if you are dynamically adding inputs:
@@ -43,6 +63,7 @@
         // This will be called by the admin adapter when the user presses the save button
         function save(callback){
             // Checkup
+            var obj = {};
 
             $('.value').each(function(){
                 let $this = $(this);
@@ -54,6 +75,39 @@
                 }
             });
             callback(obj);
+        }
+        function showStream(name, obj) {
+            let text = '';
+            let prefix = adapter + '.' + instance + '.' + name + '.';
+            text += '<td>' + name + '</td>';
+            text += '<td>' + obj[prefix + 'rtspUrl'].val + '</td>';
+            text += '<td>' + obj[prefix + 'port'].val + '</td>';
+            text += '<td>' + obj[prefix + 'resolution'].val + '</td>';
+            text += '<td>' + obj[prefix + 'tcpPort'].val + '</td>';
+            text += '<td>' + '' +
+            '<a id="delete_'+ name + '" class="delete-stream values-buttons btn-floating btn-small waves-effect waves-light red"><i class="material-icons" title="Delete device from deConz">delete</i></a>';
+            text += '</select></td>';
+            text = '<tr data-id="delete_'+ name + '">' + text + '</tr>';
+            $('#streams').append(text);
+
+            $('#delete_' + name).click(function(){
+                sendTo('rtspStream.' + instance, 'deleteStream', {device:name}, response => {
+                    console.log(response);
+                });
+
+                $("#streams > tr").remove();
+                setTimeout(emitStreams, 1000);
+            });
+        }
+
+        function emitStreams(){
+            $("#streams > tr").remove();
+            sendTo(null, 'getStreams', {}, response => {
+                for(let channel in response.streams){
+                    showStream(channel, response.streams[channel]);
+                }
+
+            })
         }
     </script>
 
@@ -69,11 +123,45 @@
         </div>
     </div>
     <div class="row">
-        <div class="col s5 input-field">
-            <input type="text" id="rtspStream" class="value" placeholder="rtsp://STREAM.IP/XY"/>
-            <label for="rtspStream" class="translate">Rtsp Stream</label>
-            <input type="text" id="port" class="value" placeholder="PORT (z.B. 9999)"/>
-            <label for="port" class="translate">Port</label>
+        <div class="col s6 input-field">
+            <input type="text" id="streamName" class="value" placeholder="Name your stream"/>
+            <p><label for="streamName" class="translate">Name</label></p>
+        </div>
+        <div class="col s4 input-field">
+            <input type="text" id="port" class="value" placeholder="8083"/>
+            <p><label for="port" class="translate">Access Port</label></p>
+        </div>
+        <div class="col s6 input-field">
+        <input type="text" id="rtspUrl" class="value" placeholder="rtsp://STREAM.IP/XY"/>
+        <p><label for="rtspUrl" class="translate">Stream Url</label></p>
+        </div>
+        <div class="col s4 input-field">
+            <input type="text" id="tcpPort" class="value" placeholder="554"/>
+            <p><label for="tcpPort" class="translate">TCP Port</label></p>
+        </div>
+        <div class="col s3 input-field">
+            <input type="text" id="resolution" class="value" placeholder="1920x1080"/>
+            <p><label for="resolution" class="translate">Resolution</label></p>
+        </div>
+        <div class="col s2 input-field">
+            <a class="waves-effect waves-light btn" id="addStream">
+                <span class="translate" data-position="bottom" data-delay="50" data-lang="Add Stream">Add Stream</span>
+            </a>
+        </div>
+        <div class="table-values-div">
+            <table class="table-values centered">
+                <thead>
+                <tr>
+                    <th class="translate" data-lang="streamName">Name</th>
+                    <th class="translate" data-lang="url">URL</th>
+                    <th class="translate" data-lang="port">Port</th>
+                    <th class="translate" data-lang="resolution">Resolution</th>
+                    <th class="translate" data-lang="tcpPort">Tcp Port</th>
+                    <th class="translate"></th>
+                </tr>
+                </thead>
+                <tbody id="streams"></tbody>
+            </table>
         </div>
     </div>
 </div>
