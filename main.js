@@ -116,11 +116,8 @@ class rtspStream extends utils.Adapter {
                     width = parseInt(size[0], 10);
                     height = parseInt(size[1], 10);
                 }
-                let ffmpegOptions = {'-stats': ''};
-                if(size == null || width == undefined || height == undefined){
-                    ffmpegOptions['-r'] = 30;
-                }
-                else{
+                let ffmpegOptions = {'-stats': '', '-r': 30};
+                if(size != null && width != undefined && height != undefined){
                     ffmpegOptions['-vf'] = ' scale=w=' + width + ':h=' + height + ':force_original_aspect_ratio=decrease';
                     Adapter.log.info("Setting stream Resolution to " + width + " x " + height);
                 }
