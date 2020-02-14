@@ -128,13 +128,18 @@ class rtspStream extends utils.Adapter {
                 let str = await Adapter.getStateAsync(Adapter.namespace + '.' + name + '.ffmpegOptions');
                 try {
                     UserFfmpegOptions = JSON.parse(str.val);
-                    Adapter.log.error("ffmpeg options ok");
                 }
                 catch(e){
                     UserFfmpegOptions = {};
-                    Adapter.log.error("ffmpeg options not ok" + str.val);
+                    if(str.val.length > 0){
+                        Adapter.log.warn("User ffmpeg options rejected, it contains invalid JSON string: " + str.val);
+
+                    }
                 }
                 ffmpegOptions = {...ffmpegOptions, ...UserFfmpegOptions};
+                if(ffmpegOptions['-r'] == undefined || ffmpegOptions['-r'] < 10){
+                    ffmpegOptions['-r'] = 30;
+                }
                 Adapter.log.info("Start stream on " + rtspUrl.val + "with port " + streams[name].videoPort + JSON.stringify(ffmpegOptions));
                 streams[name]["stream"] = new Stream({
                     name: 'name',
