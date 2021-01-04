@@ -1,4 +1,4 @@
-# ioBroker.rtspStream
+# ioBroker.rtspstream
 
 ## rtsp Adapter for ioBroker
 
@@ -34,7 +34,7 @@ http://192.168.1.100:8084
 The port is the port you have been storing in the configuration of the Adapter.
 You can use this address in a iframe of your VIS-Project.
 ### Stop streaming
-The adapter creates a state "rtspStream.0.[Streamname].startStream". Set it to false will stop streaming and eating your cpu.
+The adapter creates a state "rtspstream.0.[Streamname].startStream". Set it to false will stop streaming and eating your cpu.
 ## Known Problems
 * Currently only http is supported
 * Only works on Linux with ffmpeg installed (maybe will try to include autoinstaller and windows)
@@ -45,6 +45,8 @@ The adapter creates a state "rtspStream.0.[Streamname].startStream". Set it to f
 * wawyo (Resolution)
 
 ## Changelog
+### 0.0.3
+* (dbwb-ch) Lowercase adapter name
 ### 0.0.2
 * (dbweb-ch) Multistreams
 * (wawyo) Set resolution, 3 streams

@@ -94,7 +94,7 @@
             $('#streams').append(text);
 
             $('#delete_' + name).click(function(){
-                sendTo('rtspStream.' + instance, 'deleteStream', {device:name}, response => {
+                sendTo('rtspstream.' + instance, 'deleteStream', {device:name}, response => {
                     console.log(response);
                 });
 

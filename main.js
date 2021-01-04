@@ -9,7 +9,7 @@ const http = require('http');
 
 let streams = {};
 
-class rtspStream extends utils.Adapter {
+class rtspstream extends utils.Adapter {
 
     /**
      * @param {Partial<ioBroker.AdapterOptions>} [options={}]
@@ -17,7 +17,7 @@ class rtspStream extends utils.Adapter {
     constructor(options){
         super({
             ...options,
-            name: 'rtspStream',
+            name: 'rtspstream',
         });
         this.on('ready', this.onReady.bind(this));
         this.on('stateChange', this.onStateChange.bind(this));
@@ -265,9 +265,9 @@ class rtspStream extends utils.Adapter {
 // @ts-ignore parent is a valid property on module
 if(module.parent){
     // Export the constructor in compact mode
-    module.exports = (options) => new rtspStream(options);
+    module.exports = (options) => new rtspstream(options);
 }
 else{
     // otherwise start the instance directly
-    new rtspStream();
+    new rtspstream();
 }

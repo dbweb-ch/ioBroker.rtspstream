@@ -1,8 +1,12 @@
 {
     "common": {
-        "name": "rtspStream",
-        "version": "0.0.2",
+        "name": "rtspstream",
+        "version": "0.0.3",
         "news": {
+            "0.0.3": {
+                "en": "Lowercase adapter name",
+                "de": "Adaptername klein geschrieben"
+            },
             "0.0.2": {
                 "en": "Multiple rtsp-Streams, set video resolution",
                 "de": "Mehrere Streams möglich, Auflösung setzen"
@@ -36,13 +40,13 @@
         "main": "main.js",
         "icon": "rtsp.png",
         "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/dbweb-ch/ioBroker.rtspStream/master/admin/rtsp.png",
-        "readme": "https://github.com/dbweb-ch/ioBroker.rtspStream/blob/master/README.md",
+        "extIcon": "https://raw.githubusercontent.com/dbweb-ch/ioBroker.rtspstream/master/admin/rtsp.png",
+        "readme": "https://github.com/dbweb-ch/ioBroker.rtspstream/blob/master/README.md",
         "loglevel": "info",
         "messagebox": true,
         "subscribe": "messagebox",
         "restartAdapters": [
-            "rtspStream"
+            "rtspstream"
         ],
         "mode": "daemon",
         "type": "general",
